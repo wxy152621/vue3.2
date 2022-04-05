@@ -4,6 +4,7 @@ import { diffTokenTime } from '@/utils/auth'
 import store from '../store'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
+  // baseURL: 'http://175.27.228.178.3434/api/private/v1/',
   timeout: 5000
 })
 

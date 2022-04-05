@@ -7,7 +7,7 @@
     text-color="#fff"
     router
     unique-opened
-    :collapse="siderType"
+    :collapse="!$store.getters.siderType"
   >
     <el-sub-menu
       :index="item.id"
@@ -30,7 +30,7 @@
           <el-icon>
             <component :is="icon"></component>
           </el-icon>
-          <span>{{ it.authName }}</span>
+          <span>{{ $t(`menus.${it.path}`) }}</span>
         </template>
       </el-menu-item>
     </el-sub-menu>
@@ -45,12 +45,13 @@ import variables from '@/styles/variables.scss'
 const iconList = ref(['user', 'setting', 'shop', 'tickets', 'pie-chart'])
 const icon = ref('menu')
 
+const defaultActive = ref(sessionStorage.getItem('path') || '/users')
 const menusList = ref([])
-const initmenuList = async () => {
+const initMenusList = async () => {
   menusList.value = await menuList()
 }
-initmenuList()
-const defaultActive = ref(sessionStorage.getItem('path') || '/users')
+initMenusList()
+
 const savePath = (path) => {
   sessionStorage.setItem('path', `/${path}`)
 }
